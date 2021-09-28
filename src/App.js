@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import Booking from "./pages/Booking";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
 import Dashboard from './pages/Dashboard';
+import Registration from './pages/Registration';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
                 <Route path='/booking' exact component={Booking}/>
                 <Route path='/about' exact component={About}/>
                 <Route path='/signin' exact component={Login}/>
-                <Route path='/signup' component={SignUp}/>
+                <Route path='/signup' component={Registration}/>
             </Switch>
         </Router>
     </div>
