@@ -6,6 +6,7 @@ import Booking from "./pages/Booking";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Navbar/>
             <Switch>
                 <Route path='/' exact component={Home}/>
+                <Route path='/dashboard' exact component={Dashboard}/>
                 <Route path='/booking' exact component={Booking}/>
                 <Route path='/about' exact component={About}/>
                 <Route path='/signin' exact component={Login}/>
