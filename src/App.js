@@ -2,6 +2,7 @@ import './App.css';
 import Login from "./Login";
 import Sidebar  from './component/dashboard/Sidebar';
 import Container from './component/dashboard/Container';
+import Header from './component/dashboard/Header';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Sidebar />
         <div className="w-screen ">
           <Container />
-          {/* <Header /> */}
+          <Header />
         </div>
       </div>
 
