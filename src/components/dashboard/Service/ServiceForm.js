@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { TextField, makeStyles } from '@material-ui/core';
+import Button from './Button';
 
 // Style
 const useStyles = makeStyles(theme => ({
@@ -15,8 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 // Serivce Object
 const initialValues = {
-    id: 0,
-    createdDate: new Date(),
+     createdDate: new Date(),
     title: '',
     isAvailable: true,
     image: '',
@@ -47,14 +47,24 @@ export default function ServiceForm() {
                     name="title"
                     value={values.title}
                     onChange={handleInputChange}
-                    />
+                    /> 
                     <TextField 
                     variant="outlined"
                     label="Price"
                     name="price"
                     value={values.price}
                     onChange={handleInputChange}
-                    />
+                    />            
+                </Grid>
+                <Grid item x6={6} class="flex flex-wrap content-center">
+                    <div class="p-2">
+                        <Button
+                        type="submit"
+                        text="Submit" />
+                        {/* <Button 
+                        color="defualt"
+                        text="Reset" />           */}
+                    </div>
                 </Grid>
             </Grid> 
         </form>
