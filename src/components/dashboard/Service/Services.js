@@ -10,23 +10,31 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const headCell = [
+    {id: 'title', label: 'Title'},
+    {id: 'price', label: 'Price'},
+    {id: 'isAvailable', label: 'Available Service'},
+    {id: 'serviceStartDate', label: 'Service Start Date'},
+]
+
 export default function Services() {
 
     const classes = useStyles();
     const [records, setRecords] = useState(bookService.getAllServices())
-    const {TblContainer} = useTable()
+    const {TblContainer, TblHead} = useTable(records, headCell)
 
     return (
         <Paper className={classes.pageContent}>
             {/* <ServiceForm /> */}
             <TblContainer>
+                <TblHead />
                 <TableBody>
                     {
                         records.map(item => (
                             <TableRow key={item.id}> 
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>{item.price}</TableCell>
-                                <TableCell>{item.isAvailable}</TableCell>
+                                <TableCell>{item.isAvailable}</TableCell> {/* Boolean is not being displayed */}
                                 <TableCell>{item.serviceStartDate}</TableCell>
                             </TableRow>
 
