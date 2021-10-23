@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { TextField, makeStyles } from '@material-ui/core';
-import Button from './Button';
+import Controls  from './controls/Controls';
 
 // Style
 const useStyles = makeStyles(theme => ({
@@ -16,11 +16,12 @@ const useStyles = makeStyles(theme => ({
 
 // Serivce Object
 const initialValues = {
-     createdDate: new Date(),
+    id: 0,
     title: '',
-    isAvailable: true,
     image: '',
-    price: ''
+    price: '',
+    isAvailable: true,
+    serviceStartDate: new Date()
 }
 
 // Component
@@ -39,34 +40,65 @@ export default function ServiceForm() {
 
     return (
         <form className={classes.root}>
+
             <Grid container>
-                <Grid item x6={6}>
-                    <TextField 
-                    variant="outlined"
-                    label="Title"
-                    name="title"
-                    value={values.title}
-                    onChange={handleInputChange}
-                    /> 
-                    <TextField 
-                    variant="outlined"
-                    label="Price"
-                    name="price"
-                    value={values.price}
-                    onChange={handleInputChange}
-                    />            
+                <Grid item xs={6}>
+                    <Controls.Input
+                        label="Title"
+                        name="title"
+                        value={values.title}
+                        onChange={handleInputChange}
+                        // error={errors.fullName}
+                    />
+                    <Controls.Input
+                        label="Price"
+                        name="price"
+                        value={values.email}
+                        onChange={handleInputChange}
+                        // error={errors.email}
+                    />
+                    {/* <Controls.Input
+                        label="Mobile"
+                        name="mobile"
+                        value={values.mobile}
+                        onChange={handleInputChange}
+                        // error={errors.mobile}
+                    />
+                    <Controls.Input
+                        label="City"
+                        name="city"
+                        value={values.city}
+                        onChange={handleInputChange}
+                    /> */}
+
                 </Grid>
-                <Grid item x6={6} class="flex flex-wrap content-center">
-                    <div class="p-2">
-                        <Button
-                        type="submit"
-                        text="Submit" />
-                        {/* <Button 
-                        color="defualt"
-                        text="Reset" />           */}
+                <Grid item xs={6}>
+                    <Controls.DatePicker
+                        name="serviceStartDate"
+                        label="Service Start Date"
+                        value={values.serviceStartDate}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Checkbox
+                        name="isAvailable"
+                        label="Available Service"
+                        value={values.isAvailable}
+                        onChange={handleInputChange}
+                    />
+
+                    <div>
+                        <Controls.Button
+                            type="submit"
+                            text="Submit" />
+                        <Controls.Button
+                            text="Reset"
+                            color="default"
+                           // onClick={resetForm} 
+                            />
                     </div>
                 </Grid>
             </Grid> 
         </form>
     )
 }
+
