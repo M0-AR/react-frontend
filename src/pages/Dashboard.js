@@ -12,6 +12,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import Container from '../components/dashboard/Container'
+import Services from '../components/dashboard/Service/Services'
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -202,7 +203,7 @@ export default function Example() {
               {/* Replace with your content */}
               <div className="py-4">
                 <div className="border-4 border-dashed border-gray-200 rounded-lg flex-wrap">
-                  <Container/>
+                  <Services />
                 </div>
               </div>
               {/* /End replace */}
