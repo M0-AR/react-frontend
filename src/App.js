@@ -6,8 +6,8 @@ import Booking from "./pages/Booking";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-//import Dashboard from './pages/Dashboard';
-import Dashboard from './components/new-dashboard/Dashboard'
+import Dashboard from './pages/Dashboard';
+
 function App() {
   return (
     <div className="App">
