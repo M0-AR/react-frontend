@@ -21,7 +21,13 @@ export default function Services() {
 
     const classes = useStyles();
     const [records, setRecords] = useState(bookService.getAllServices())
-    const {TblContainer, TblHead} = useTable(records, headCell)
+
+    const {
+        TblContainer,
+        TblHead, 
+        TblPagination, 
+        recordsAfterPagingAndSorting
+    } = useTable(records, headCell)
 
     return (
         <Paper className={classes.pageContent}>
@@ -30,7 +36,7 @@ export default function Services() {
                 <TblHead />
                 <TableBody>
                     {
-                        records.map(item => (
+                        recordsAfterPagingAndSorting().map(item => (
                             <TableRow key={item.id}> 
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>{item.price}</TableCell>
@@ -42,6 +48,7 @@ export default function Services() {
                     }
                 </TableBody>
             </TblContainer>
+            <TblPagination />
         </Paper>
     )
 }
