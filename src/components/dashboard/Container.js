@@ -1,9 +1,6 @@
 import React from 'react'
 
 import Card from './Card'
-import Middle from './Middle'
-import RightBar from './RightBar'
-
 
 
 
@@ -24,8 +21,7 @@ const Container = () => {
 
             </div>
             <div className="flex  ml-3 mt-6 space-x-6  mr-4">
-                {/* <Middle />
-                <RightBar /> */}
+                
             </div>
         </div>
     )
