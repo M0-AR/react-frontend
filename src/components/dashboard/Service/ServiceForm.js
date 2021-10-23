@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import { TextField, makeStyles } from '@material-ui/core';
 import Controls  from './controls/Controls';
-
-// Style
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& .MuiFormControl-root': {
-            width: '80%',
-            margin: theme.spacing(1)
-        }
-    }
-}))
-
+import { useForm, Form } from './useForm'
+import * as bookService from './services/bookService'
 
 // Serivce Object
 const initialValues = {
@@ -27,20 +17,39 @@ const initialValues = {
 // Component
 export default function ServiceForm() {
 
-    const [values, setValues] = useState(initialValues);
-    const classes = useStyles();
-
-    const handleInputChange = e => {
-        const { name, value } = e.target
-        setValues({
-            ...values, // Ignore rest
-            [name]:value
+    const validate = (fieldValues = values) => {
+        let temp = { ...errors }
+        if ('title' in fieldValues)
+            temp.title = fieldValues.title ? "" : "This field is required."
+        if ('price' in fieldValues) 
+            temp.price = fieldValues.price.length > 0 ? "" : "Minimum 1 number required."        
+        setErrors({
+            ...temp
         })
+
+        if (fieldValues == values)
+            return Object.values(temp).every(x => x == "")
+    }
+
+    const {
+        values,
+        setValues,
+        errors, 
+        setErrors,
+        handleInputChange,
+        resetForm
+    } = useForm(initialValues, true, validate)
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (validate()){
+            bookService.insertService(values)
+            resetForm()
+        }
     }
 
     return (
-        <form className={classes.root}>
-
+        <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={6}>
                     <Controls.Input
@@ -48,29 +57,15 @@ export default function ServiceForm() {
                         name="title"
                         value={values.title}
                         onChange={handleInputChange}
-                        // error={errors.fullName}
+                        error={errors.title}
                     />
                     <Controls.Input
                         label="Price"
                         name="price"
-                        value={values.email}
+                        value={values.price}
                         onChange={handleInputChange}
-                        // error={errors.email}
+                        error={errors.price}
                     />
-                    {/* <Controls.Input
-                        label="Mobile"
-                        name="mobile"
-                        value={values.mobile}
-                        onChange={handleInputChange}
-                        // error={errors.mobile}
-                    />
-                    <Controls.Input
-                        label="City"
-                        name="city"
-                        value={values.city}
-                        onChange={handleInputChange}
-                    /> */}
-
                 </Grid>
                 <Grid item xs={6}>
                     <Controls.DatePicker
@@ -86,19 +81,14 @@ export default function ServiceForm() {
                         onChange={handleInputChange}
                     />
 
-                    <div>
+                    <div className='p-2'>
                         <Controls.Button
                             type="submit"
                             text="Submit" />
-                        <Controls.Button
-                            text="Reset"
-                            color="default"
-                           // onClick={resetForm} 
-                            />
                     </div>
                 </Grid>
             </Grid> 
-        </form>
+        </Form>
     )
 }
 
