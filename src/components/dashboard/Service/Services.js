@@ -57,7 +57,7 @@ export default function Services() {
         let target = e.target;
         setFilterFn({
             fn: items => {
-                if (target.value == "")
+                if (target.value === "")
                     return items
                 else 
                     return items.filter(x => x.title.toLowerCase().includes(target.value))

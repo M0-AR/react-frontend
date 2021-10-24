@@ -28,7 +28,7 @@ export function updateService(data) {
 
 export function deleteService(id) {
     let services = getAllServices();
-    services = services.filter(x => x.id != id);
+    services = services.filter(x => x.id !== id);
     localStorage.setItem(KEYS.services, JSON.stringify(services));
 }
 
