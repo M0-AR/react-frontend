@@ -10,6 +10,7 @@ const initialValues = {
     title: '',
     image: '',
     price: '',
+    imageUrl: '',
     isAvailable: true,
     serviceStartDate: new Date()
 }
@@ -24,7 +25,9 @@ export default function ServiceForm(props) {
         if ('title' in fieldValues)
             temp.title = fieldValues.title ? "" : "This field is required."
         if ('price' in fieldValues) 
-            temp.price = fieldValues.price.length > 0 ? "" : "Minimum 1 number required."        
+            temp.price = fieldValues.price.length > 1 ? "" : "Minimum 2 number required."        
+        if ('imageUrl' in fieldValues)
+            temp.imageUrl = fieldValues.imageUrl ? "" : "This field is required."
         setErrors({
             ...temp
         })
@@ -73,6 +76,13 @@ export default function ServiceForm(props) {
                         value={values.price}
                         onChange={handleInputChange}
                         error={errors.price}
+                    />
+                    <Controls.Input
+                        label="Image URL"
+                        name="imageUrl"
+                        value={values.imageUrl}
+                        onChange={handleInputChange}
+                        error={errors.imageUrl}
                     />
                 </Grid>
                 <Grid item xs={6}>
