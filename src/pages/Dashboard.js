@@ -11,7 +11,6 @@ import {
   UsersIcon,
   XIcon,
 } from '@heroicons/react/outline'
-import Container from '../components/dashboard/Container'
 import Services from '../components/dashboard/Service/Services'
 
 const navigation = [
