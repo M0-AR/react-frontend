@@ -3,7 +3,6 @@ import { Paper, Card, Typography, makeStyles, Button } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(5),
         backgroundColor: '#fdfdff'
     },
     pageHeader:{

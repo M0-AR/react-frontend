@@ -10,10 +10,12 @@ import Popup from './Popup';
 import CloseIcon from '@material-ui/icons/Close'
 import ServiceHeader from './ServiceHeader';
 import Notification from './Notification';
+import ConfirmDialog from './ConfirmDialog'
+
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
-        margin: theme.spacing(5),
+        // margin: theme.spacing(5),
         padding: theme.spacing(3)
     },
     searchInput: {
@@ -42,6 +44,7 @@ export default function Services() {
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; }});
     const [openPopup, setOpenPopup] = useState(false)
     const [notify, setNotify] = useState({ isOpen: false, message: '', type: ''})
+    const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
 
     const {
         TblContainer,
@@ -84,15 +87,17 @@ export default function Services() {
     }
 
     const onDelete = id => {
-        if (window.confirm('Are you sure to delete this record?')) {
-            bookService.deleteService(id);
-            setRecords(bookService.getAllServices)
-            setNotify({
-                isOpen: true,
-                message: 'Deleted Successfully',
-                type: 'error'
-            })
-        }
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        bookService.deleteService(id);
+        setRecords(bookService.getAllServices)
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error'
+        })
     }
 
     return (
@@ -143,7 +148,14 @@ export default function Services() {
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="secondary"
-                                            onClick = {() => {onDelete(item.id)}}
+                                            onClick = {() => {
+                                                setConfirmDialog({
+                                                    isOpen: true,
+                                                    title: 'Are you sure to delete this record?',
+                                                    subTitle: "You can't undo this operation ",
+                                                    onConfirm: () => { onDelete(item.id) }
+                                                })
+                                            }}
                                         >
                                             <CloseIcon fontSize="small" />
                                         </Controls.ActionButton>
@@ -169,6 +181,10 @@ export default function Services() {
             <Notification 
                 notify={notify}
                 setNotify={setNotify}
+            />
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog = {setConfirmDialog}
             />
         </>
     )
