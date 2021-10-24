@@ -7,7 +7,6 @@ import { useForm, Form } from './useForm'
 const initialValues = {
     id: 0,
     title: '',
-    image: '',
     price: '',
     imageUrl: '',
     isAvailable: true,
