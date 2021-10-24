@@ -3,11 +3,12 @@ import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornm
 import * as bookService from './services/bookService'
 import useTable from './useTable';
 import Controls from './controls/Controls';
-import { EditOutlined, Search } from "@material-ui/icons"
+import { EditOutlined, Search, Dashboard } from "@material-ui/icons"
 import AddIcon from '@material-ui/icons/Add'
 import ServiceForm from './ServiceForm';
 import Popup from './Popup';
 import CloseIcon from '@material-ui/icons/Close'
+import PageHeader from './ServiceHeader';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -78,6 +79,11 @@ export default function Services() {
 
     return (
         <>
+            <PageHeader
+                title="New Service"
+                subTitle="Provide CRUD operations."
+                icon={<Dashboard fontSize="large"/>}
+            />
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input 
