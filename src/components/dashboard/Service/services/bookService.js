@@ -11,6 +11,19 @@ export function insertService(data) {
     localStorage.setItem(KEYS.services,JSON.stringify(employees))
 }
 
+export function updateService(data) {
+    let services = getAllServices();
+    let recordIndex = services.findIndex(x => x.id == data.id);
+    services[recordIndex] = { ...data }
+    localStorage.setItem(KEYS.employees, JSON.stringify(services));
+}
+
+export function getAllServices() {
+    if (localStorage.getItem(KEYS.services) == null)
+        localStorage.setItem(KEYS.services, JSON.stringify([]))
+    return JSON.parse(localStorage.getItem(KEYS.services));
+}
+
 export function generateServiceId() {
     if (localStorage.getItem(KEYS.serviceId) == null)
         localStorage.setItem(KEYS.serviceId, '0')
@@ -19,8 +32,3 @@ export function generateServiceId() {
     return id;
 }
 
-export function getAllServices() {
-    if (localStorage.getItem(KEYS.services) == null)
-        localStorage.setItem(KEYS.services, JSON.stringify([]))
-    return JSON.parse(localStorage.getItem(KEYS.services));
-}

@@ -3,10 +3,11 @@ import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornm
 import * as bookService from './services/bookService'
 import useTable from './useTable';
 import Controls from './controls/Controls';
-import { Search } from "@material-ui/icons"
+import { EditOutlined, Search } from "@material-ui/icons"
 import AddIcon from '@material-ui/icons/Add'
 import ServiceForm from './ServiceForm';
 import Popup from './Popup';
+import CloseIcon from '@material-ui/icons/Close'
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -28,11 +29,13 @@ const headCell = [
     {id: 'price', label: 'Price'},
     // {id: 'isAvailable', label: 'Available Service'},
     {id: 'serviceStartDate', label: 'Service Start Date'},
+    {id: 'actions', label: 'Actions', disableSorting: true},
 ]
 
 export default function Services() {
 
     const classes = useStyles();
+    const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(bookService.getAllServices())
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; }});
     const [openPopup, setOpenPopup] = useState(false)
@@ -57,11 +60,21 @@ export default function Services() {
     }
 
     const addOrEdit = (service, resetForm) => {
-        bookService.insertService(service)
+        if (service.id == 0)
+            bookService.insertService(service)
+        else
+            bookService.updateService(service)
         resetForm()
+        setRecordForEdit(null)
         setOpenPopup(false)
         setRecords(bookService.getAllServices)
     }
+
+    const openInPopup = item => {
+        setRecordForEdit(item)
+        setOpenPopup(true)
+    }
+
 
     return (
         <>
@@ -83,7 +96,8 @@ export default function Services() {
                     text = "Add New"
                     startIcon = {<AddIcon />}
                     className = {classes.addButton}
-                    onClick={() => setOpenPopup(true)}
+                    onClick={() => {setOpenPopup(true); 
+                                    setRecordForEdit(null);}}
                     />
                 </Toolbar>
                 <TblContainer>
@@ -96,6 +110,19 @@ export default function Services() {
                                     <TableCell>{item.price}</TableCell>
                                     {/* <TableCell>{item.isAvailable}</TableCell> Boolean is not being displayed */}
                                     <TableCell>{item.serviceStartDate}</TableCell>
+                                    <TableCell>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            onClick = {() => {openInPopup(item)}}
+                                        >
+                                            <EditOutlined fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="secondary"
+                                        >
+                                            <CloseIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                    </TableCell>
                                 </TableRow>
 
                             ))
@@ -110,6 +137,7 @@ export default function Services() {
                 setOpenPopup={setOpenPopup}
             >
                 <ServiceForm 
+                    recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
                 />
             </Popup>

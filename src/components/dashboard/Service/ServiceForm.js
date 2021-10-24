@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Controls  from './controls/Controls';
 import { useForm, Form } from './useForm'
@@ -17,7 +17,7 @@ const initialValues = {
 // Component
 export default function ServiceForm(props) {
 
-    const { addOrEdit } = props;
+    const { addOrEdit, recordForEdit } = props;
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -48,6 +48,13 @@ export default function ServiceForm(props) {
             addOrEdit(values, resetForm);
         }
     }
+
+    useEffect(() => {
+        if (recordForEdit != null)
+            setValues({
+                ...recordForEdit
+            })
+    }, [recordForEdit])
 
     return (
         <Form onSubmit={handleSubmit}>
