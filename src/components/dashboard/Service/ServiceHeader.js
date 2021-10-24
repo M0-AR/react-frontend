@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function PageHeader(props) {
+export default function ServiceHeader(props) {
 
     const classes = useStyles();
     const { title, subTitle, icon } = props;

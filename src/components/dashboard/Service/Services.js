@@ -8,7 +8,8 @@ import AddIcon from '@material-ui/icons/Add'
 import ServiceForm from './ServiceForm';
 import Popup from './Popup';
 import CloseIcon from '@material-ui/icons/Close'
-import PageHeader from './ServiceHeader';
+import ServiceHeader from './ServiceHeader';
+import Notification from './Notification';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -40,6 +41,7 @@ export default function Services() {
     const [records, setRecords] = useState(bookService.getAllServices())
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; }});
     const [openPopup, setOpenPopup] = useState(false)
+    const [notify, setNotify] = useState({ isOpen: false, message: '', type: ''})
 
     const {
         TblContainer,
@@ -69,6 +71,11 @@ export default function Services() {
         setRecordForEdit(null)
         setOpenPopup(false)
         setRecords(bookService.getAllServices)
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success'
+        })
     }
 
     const openInPopup = item => {
@@ -76,12 +83,23 @@ export default function Services() {
         setOpenPopup(true)
     }
 
+    const onDelete = id => {
+        if (window.confirm('Are you sure to delete this record?')) {
+            bookService.deleteService(id);
+            setRecords(bookService.getAllServices)
+            setNotify({
+                isOpen: true,
+                message: 'Deleted Successfully',
+                type: 'error'
+            })
+        }
+    }
 
     return (
         <>
-            <PageHeader
+            <ServiceHeader
                 title="New Service"
-                subTitle="Provide CRUD operations."
+                subTitle="Provide CRUD operations"
                 icon={<Dashboard fontSize="large"/>}
             />
             <Paper className={classes.pageContent}>
@@ -125,6 +143,7 @@ export default function Services() {
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="secondary"
+                                            onClick = {() => {onDelete(item.id)}}
                                         >
                                             <CloseIcon fontSize="small" />
                                         </Controls.ActionButton>
@@ -147,6 +166,10 @@ export default function Services() {
                     addOrEdit={addOrEdit}
                 />
             </Popup>
+            <Notification 
+                notify={notify}
+                setNotify={setNotify}
+            />
         </>
     )
 }
