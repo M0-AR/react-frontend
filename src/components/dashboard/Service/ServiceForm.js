@@ -101,7 +101,8 @@ export default function ServiceForm(props) {
                     <div className='p-2'>
                         <Controls.Button
                             type="submit"
-                            text="Submit" />
+                            text="Submit" 
+                        />
                     </div>
                 </Grid>
             </Grid> 

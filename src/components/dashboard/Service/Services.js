@@ -66,7 +66,7 @@ export default function Services() {
     }
 
     const addOrEdit = (service, resetForm) => {
-        if (service.id == 0)
+        if (service.id === 0)
             bookService.insertService(service)
         else
             bookService.updateService(service)

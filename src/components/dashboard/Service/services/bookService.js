@@ -3,6 +3,7 @@ const KEYS ={
     serviceId:'employeeId'
 }
 
+
 export function insertService(data) {
     data['id'] = generateServiceId()
     let employees=getAllServices();
@@ -20,9 +21,9 @@ export function generateServiceId() {
 
 export function updateService(data) {
     let services = getAllServices();
-    let recordIndex = services.findIndex(x => x.id == data.id);
+    let recordIndex = services.findIndex(x => x.id === data.id);
     services[recordIndex] = { ...data }
-    localStorage.setItem(KEYS.employees, JSON.stringify(services));
+    localStorage.setItem(KEYS.services, JSON.stringify(services));
 }
 
 export function deleteService(id) {
