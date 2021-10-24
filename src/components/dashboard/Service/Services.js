@@ -56,6 +56,13 @@ export default function Services() {
         })
     }
 
+    const addOrEdit = (service, resetForm) => {
+        bookService.insertService(service)
+        resetForm()
+        setOpenPopup(false)
+        setRecords(bookService.getAllServices)
+    }
+
     return (
         <>
             <Paper className={classes.pageContent}>
@@ -102,7 +109,9 @@ export default function Services() {
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
-                <ServiceForm />
+                <ServiceForm 
+                    addOrEdit={addOrEdit}
+                />
             </Popup>
         </>
     )

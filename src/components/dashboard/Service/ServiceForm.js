@@ -15,7 +15,9 @@ const initialValues = {
 }
 
 // Component
-export default function ServiceForm() {
+export default function ServiceForm(props) {
+
+    const { addOrEdit } = props;
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -43,8 +45,7 @@ export default function ServiceForm() {
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()){
-            bookService.insertService(values)
-            resetForm()
+            addOrEdit(values, resetForm);
         }
     }
 
