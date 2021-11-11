@@ -11,11 +11,11 @@ stages:
 
 build:
   stage: build
-  image: node
+  image: node:14
   script: 
     - echo "Start building App"
-    - npm install
-    - npm build
+    - yarn install
+    - yarn build
     - echo "Build successfully!"
   artifacts:
     expire_in: 1 hour
@@ -30,6 +30,8 @@ test:
     - echo "Testing App"
     - CI=true npm test
     - echo "Test successfully!"
+  only:
+    - test
 
 publish:
   image: docker:latest
