@@ -5,7 +5,7 @@ import { useForm, Form } from './useForm'
 
 // Serivce Object
 const initialValues = {
-    service_id: 0,
+    service_id: '',
     service_title: '',
     service_price: '',
     service_image_url: '',

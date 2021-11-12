@@ -5,14 +5,14 @@ const KEYS ={
     serviceId:'employeeId'
 }
 
-const baseUrl = process.env.NODE_ENV === 'development' ?
-    "http://localhost:10000/":""; // Check if dev environment
+const baseUrl = process.env.NODE_ENV === '' ? // development
+    "http://localhost:10000/":"https://api.comit.dev/"; // Check if dev environment
 
 export function insertService(data) {
     //data['id'] = generateServiceId()
     let services=getAllServices();
     services.push(data)
-    axios.put(baseUrl + "api/v1/go-mongo/dashboard/add", data)
+    axios.post(baseUrl + "api/v1/go-mongo/dashboard/add", data)
           .then(res=> {
               console.log(res)
           })
