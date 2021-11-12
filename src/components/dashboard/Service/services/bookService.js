@@ -1,14 +1,25 @@
+import axios from 'axios'
+
 const KEYS ={
     services:'services',
     serviceId:'employeeId'
 }
 
+const baseUrl = process.env.NODE_ENV === 'development' ?
+    "http://localhost:10000/":""; // Check if dev environment
 
 export function insertService(data) {
-    data['id'] = generateServiceId()
-    let employees=getAllServices();
-    employees.push(data)
-    localStorage.setItem(KEYS.services,JSON.stringify(employees))
+    //data['id'] = generateServiceId()
+    let services=getAllServices();
+    services.push(data)
+    axios.put(baseUrl + "api/v1/go-mongo/dashboard/add", data)
+          .then(res=> {
+              console.log(res)
+          })
+          .catch(err=>{
+              console.log(err)
+          })
+    localStorage.setItem(KEYS.services,JSON.stringify(services))
 }
 
 export function generateServiceId() {
@@ -33,7 +44,20 @@ export function deleteService(id) {
 }
 
 export function getAllServices() {
-    if (localStorage.getItem(KEYS.services) == null)
-        localStorage.setItem(KEYS.services, JSON.stringify([]))
+    //cleanLocalStoarge()
+    if (localStorage.getItem(KEYS.services) == null) {
+        axios.get(baseUrl + "api/v1/go-mongo/dashboard/list")
+          .then(res=> {
+              console.log(res.data.services)
+              localStorage.setItem(KEYS.services, JSON.stringify(res.data.services))
+          })
+          .catch(err=>{
+              console.log(err)
+          })
+    } 
     return JSON.parse(localStorage.getItem(KEYS.services));
+}
+
+function cleanLocalStoarge() {
+        localStorage.clear()
 }

@@ -5,12 +5,12 @@ import { useForm, Form } from './useForm'
 
 // Serivce Object
 const initialValues = {
-    id: 0,
-    title: '',
-    price: '',
-    imageUrl: '',
-    isAvailable: true,
-    serviceStartDate: new Date()
+    service_id: 0,
+    service_title: '',
+    service_price: '',
+    service_image_url: '',
+    service_is_available: true,
+    service_start_date: new Date()
 }
 
 // Component
@@ -20,12 +20,12 @@ export default function ServiceForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('title' in fieldValues)
-            temp.title = fieldValues.title ? "" : "This field is required."
-        if ('price' in fieldValues) 
-            temp.price = fieldValues.price.length > 1 ? "" : "Minimum 2 number required."        
-        if ('imageUrl' in fieldValues)
-            temp.imageUrl = fieldValues.imageUrl ? "" : "This field is required."
+        if ('service_title' in fieldValues)
+            temp.service_title = fieldValues.service_title ? "" : "This field is required."
+        if ('service_price' in fieldValues) 
+            temp.service_price = fieldValues.service_price.length > 1 ? "" : "Minimum 2 number required."        
+        if ('service_image_url' in fieldValues)
+            temp.service_image_url = fieldValues.service_image_url ? "" : "This field is required."
         setErrors({
             ...temp
         })
@@ -63,37 +63,37 @@ export default function ServiceForm(props) {
                 <Grid item xs={6}>
                     <Controls.Input
                         label="Title"
-                        name="title"
-                        value={values.title}
+                        name="service_title"
+                        value={values.service_title}
                         onChange={handleInputChange}
-                        error={errors.title}
+                        error={errors.service_title}
                     />
                     <Controls.Input
                         label="Price"
-                        name="price"
-                        value={values.price}
+                        name="service_price"
+                        value={values.service_price}
                         onChange={handleInputChange}
-                        error={errors.price}
+                        error={errors.service_price}
                     />
                     <Controls.Input
                         label="Image URL"
-                        name="imageUrl"
-                        value={values.imageUrl}
+                        name="service_image_url"
+                        value={values.service_image_url}
                         onChange={handleInputChange}
-                        error={errors.imageUrl}
+                        error={errors.service_image_url}
                     />
                 </Grid>
                 <Grid item xs={6}>
                     <Controls.DatePicker
-                        name="serviceStartDate"
                         label="Service Start Date"
-                        value={values.serviceStartDate}
+                        name="service_start_date"
+                        value={values.service_start_date}
                         onChange={handleInputChange}
                     />
                     <Controls.Checkbox
-                        name="isAvailable"
                         label="Available Service"
-                        value={values.isAvailable}
+                        name="service_is_available"
+                        value={values.service_is_available}
                         onChange={handleInputChange}
                     />
 

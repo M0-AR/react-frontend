@@ -29,10 +29,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCell = [
-    {id: 'title', label: 'Title'},
-    {id: 'price', label: 'Price'},
+    {id: 'service_title', label: 'Title'},
+    {id: 'service_price', label: 'Price'},
     // {id: 'isAvailable', label: 'Available Service'},
-    {id: 'serviceStartDate', label: 'Service Start Date'},
+    {id: 'service_start_date', label: 'Service Start Date'},
     {id: 'actions', label: 'Actions', disableSorting: true},
 ]
 
@@ -60,7 +60,7 @@ export default function Services() {
                 if (target.value === "")
                     return items
                 else 
-                    return items.filter(x => x.title.toLowerCase().includes(target.value))
+                    return items.filter(x => x.service_title.toLowerCase().includes(target.value))
             }
         })
     }
@@ -86,12 +86,12 @@ export default function Services() {
         setOpenPopup(true)
     }
 
-    const onDelete = id => {
+    const onDelete = service_id => {
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false
         })
-        bookService.deleteService(id);
+        bookService.deleteService(service_id);
         setRecords(bookService.getAllServices)
         setNotify({
             isOpen: true,
@@ -134,11 +134,11 @@ export default function Services() {
                     <TableBody>
                         {
                             recordsAfterPagingAndSorting().map(item => (
-                                <TableRow key={item.id}> 
-                                    <TableCell>{item.title}</TableCell>
-                                    <TableCell>{item.price}</TableCell>
-                                    {/* <TableCell>{item.isAvailable}</TableCell> Boolean is not being displayed */}
-                                    <TableCell>{item.serviceStartDate}</TableCell>
+                                <TableRow key={item.service_id}> 
+                                    <TableCell>{item.service_title}</TableCell>
+                                    <TableCell>{item.service_price}</TableCell>
+                                    {/* <TableCell>{item.service_is_available}</TableCell> Boolean is not being displayed */}
+                                    <TableCell>{item.service_start_date}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
@@ -153,7 +153,7 @@ export default function Services() {
                                                     isOpen: true,
                                                     title: 'Are you sure to delete this record?',
                                                     subTitle: "You can't undo this operation ",
-                                                    onConfirm: () => { onDelete(item.id) }
+                                                    onConfirm: () => { onDelete(item.service_id) }
                                                 })
                                             }}
                                         >
