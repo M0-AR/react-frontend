@@ -1,12 +1,12 @@
-import axios from 'axios'
+// import axios from 'axios'
 
 const KEYS ={
     services:'services',
     serviceId:'employeeId'
 }
 
-const baseUrl = process.env.NODE_ENV === '' ? // development
-    "http://localhost:10000/":"https://api.comit.dev/"; // Check if dev environment
+// const baseUrl = process.env.NODE_ENV === '' ? // development
+//     "http://localhost:10000/":"https://api.comit.dev/"; // Check if dev environment
 
 // export function insertService(data) {
 //     //data['id'] = generateServiceId()
