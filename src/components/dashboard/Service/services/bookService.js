@@ -58,6 +58,6 @@ export function getAllServices() {
     return JSON.parse(localStorage.getItem(KEYS.services));
 }
 
-function cleanLocalStoarge() {
-        localStorage.clear()
-}
+// function cleanLocalStoarge() {
+//         localStorage.clear()
+// }
