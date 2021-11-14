@@ -55,7 +55,7 @@ export default function ServiceForm(props) {
             setValues({
                 ...recordForEdit
             })
-    }, [recordForEdit])
+    }, [recordForEdit, setValues])
 
     return (
         <Form onSubmit={handleSubmit}>
