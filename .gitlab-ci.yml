@@ -4,8 +4,6 @@ variables:
   REPO_NAME: gitlab.com/devops-dtu/front
 
 stages:
-  - build
-  - test
   - publish
   - deploy
 
