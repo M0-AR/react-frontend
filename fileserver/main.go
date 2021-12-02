@@ -1,14 +1,19 @@
 package main
 
 import (
-	"log"
 	"net/http"
+	"regexp"
 )
 
 func main() {
+	fileServer := http.FileServer(http.Dir("./"))
+	fileMatcher := regexp.MustCompile(`\.[a-zA-Z]*$`)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./index.html")
+		if !fileMatcher.MatchString(r.URL.Path) {
+			http.ServeFile(w, r, "./index.html")
+		} else {
+			fileServer.ServeHTTP(w, r)
+		}
 	})
-	//http.Handle("/", http.FileServer(http.Dir("./")))
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	http.ListenAndServe(":3000", nil)
 }
