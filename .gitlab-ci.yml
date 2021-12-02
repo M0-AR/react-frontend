@@ -4,36 +4,9 @@ variables:
   REPO_NAME: gitlab.com/devops-dtu/front
 
 stages:
-  - build
-  - test
   - publish
   - deploy
 
-build:
-  stage: build
-  image: node:14
-  script: 
-    - echo "Start building App"
-    - yarn install
-    - yarn build
-    - echo "Build successfully!"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - build
-      - node_modules/
-  only:
-    - test
-
-test:
-  stage: test
-  image: node
-  script:
-    - echo "Testing App"
-    - CI=true npm test
-    - echo "Test successfully!"
-  only:
-    - test
 
 publish:
   image: docker:latest
