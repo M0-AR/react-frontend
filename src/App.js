@@ -37,7 +37,8 @@ const Page = () => {
             <Navbar/>
             <Switch>
                 <Route path='/' exact component={Home}/>
-                <Route path='/signin' exact component={Login}/>
+                <Route path='/signin' component={Login}/>
+                <Route path='/' component={Dashboard}/>
                 <Route path='/signup' component={Registration}/>
             </Switch>
         </Router>
