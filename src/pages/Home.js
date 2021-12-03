@@ -1,11 +1,12 @@
 import React from "react";
+import {Link } from "react-router-dom";
 import './Home.css'
 
 function Home(){
     return (
         <div class="leading-normal tracking-normal text-white gradient">
-            <div class="pt-24">
-                <div class="container px-16 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+            <div class="pt-19">
+                <div class="container px-16 mx-auto flex flex-wrap flex-col md:flex-row">
                     <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
                         <h1 class="my-4 text-5xl font-bold leading-tight">
                             BookUs - A booking service suited for your needs!
@@ -13,13 +14,15 @@ function Home(){
                         <p class="leading-normal text-2xl mb-8">
                             Never miss a booking again. Try our booking system for free.
                         </p>
+                        <Link to="/signup">      
                         <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                             Sign up
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>
-            <div class="relative -mt-12 lg:-mt-24">
+            <div class="relative -mt-8 lg:-mt-8">
                 <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
