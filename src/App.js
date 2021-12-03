@@ -5,21 +5,43 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from './pages/Dashboard';
 import Registration from './pages/Registration';
+import {useEffect} from "react";
+import {CookiesProvider, useCookies} from "react-cookie";
 
 function App() {
-  return (
-    <div className="App">
+    useEffect(() => {
+        document.title = "BookUs - Booking Service"
+    })
+    return (
+        <div className="App">
+            <CookiesProvider>
+                    <Page/>
+            </CookiesProvider>
+        </div>
+    );
+}
+
+const Page = () => {
+    const [cookies] = useCookies();
+
+    if (cookies.ticket) return (
+        <Router>
+            <Navbar/>
+            <Switch>
+                <Route path='/' exact component={Dashboard}/>
+            </Switch>
+        </Router>
+    )
+    return (
         <Router>
             <Navbar/>
             <Switch>
                 <Route path='/' exact component={Home}/>
-                <Route path='/dashboard' exact component={Dashboard}/>
                 <Route path='/signin' exact component={Login}/>
                 <Route path='/signup' component={Registration}/>
             </Switch>
         </Router>
-    </div>
-  );
+    )
 }
 
 export default App;
