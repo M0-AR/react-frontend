@@ -86,12 +86,12 @@ export default function Services() {
         setOpenPopup(true)
     }
 
-    const onDelete = service_id => {
+    const onDelete = service_title => {
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false
         })
-        bookService.deleteService(service_id);
+        bookService.deleteService(service_title);
         setRecords(bookService.getAllServices)
         setNotify({
             isOpen: true,
@@ -153,7 +153,7 @@ export default function Services() {
                                                     isOpen: true,
                                                     title: 'Are you sure to delete this record?',
                                                     subTitle: "You can't undo this operation ",
-                                                    onConfirm: () => { onDelete(item.service_id) }
+                                                    onConfirm: () => { onDelete(item.service_title) }
                                                 })
                                             }}
                                         >
