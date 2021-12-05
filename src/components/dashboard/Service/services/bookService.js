@@ -6,7 +6,7 @@ const KEYS ={
 }
 
 const baseUrl = process.env.NODE_ENV === 'development' ? // development
-    "http://64.225.100.149:8080/": "http://localhost:10000/"; // Check if dev environment
+    "http://64.225.100.149:8080/": "http://64.225.100.149:8080/"; // Check if dev environment
 
 export function insertService(data) {
     //data['id'] = generateServiceId()
