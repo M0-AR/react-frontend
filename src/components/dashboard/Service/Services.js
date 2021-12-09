@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment} from '@material-ui/core';
 import * as bookService from './services/bookService'
 import useTable from './useTable';
@@ -11,6 +11,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import ServiceHeader from './ServiceHeader';
 import Notification from './Notification';
 import ConfirmDialog from './ConfirmDialog'
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +41,19 @@ export default function Services() {
 
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(bookService.getAllServices())
+    const [records, setRecords] = useState([])
+
+    useEffect(() => {
+        (
+            async () => {
+                const {data} = await axios.get('https://bookus.comit.dev/api/v1/go-mongo/dashboard/list');
+                localStorage.setItem('services', JSON.stringify(data.services))
+
+                setRecords(data.services)
+            }
+        )()
+    }, []);
+
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; }});
     const [openPopup, setOpenPopup] = useState(false)
     const [notify, setNotify] = useState({ isOpen: false, message: '', type: ''})
